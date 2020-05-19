@@ -1,0 +1,6 @@
+[submodule "esp-idf"]
+	path = esp-idf
+	url = https://github.com/espressif/esp-idf.git
+[submodule "BlueRetro"]
+	path = BlueRetro
+	url = https://github.com/darthcloud/BlueRetro.git
