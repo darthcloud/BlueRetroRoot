@@ -2,5 +2,6 @@
 !.gitignore
 !LICENSE
 !README.md
+!blueretro_dev.sh
 !esp-idf/
 !BlueRetro/
