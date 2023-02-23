@@ -28,3 +28,9 @@ idf.py build
 idf.py -p /dev/ttyUSB0 flash
 idf.py -p /dev/ttyUSB0 monitor
 ```
+
+## Dump spiffs
+```bash
+esptool.py --chip esp32 read_flash 0x310000 0xF0000 spiffs.bin
+mkspiffs.exe -u spiffs_unpack -b 4096 -p 256 -s 0xF0000 .\spiffs.bin
+```
