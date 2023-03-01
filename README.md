@@ -34,3 +34,8 @@ idf.py -p /dev/ttyUSB0 monitor
 esptool.py --chip esp32 read_flash 0x310000 0xF0000 spiffs.bin
 mkspiffs.exe -u spiffs_unpack -b 4096 -p 256 -s 0xF0000 .\spiffs.bin
 ```
+
+## QEMU
+```bash
+qemu/bin/qemu-system-xtensa -nographic -machine esp32 -drive file=node0/build/flash_image.bin,if=mtd,format=raw -serial tcp::5555,server,nowait
+```
