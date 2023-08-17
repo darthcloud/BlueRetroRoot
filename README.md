@@ -35,6 +35,11 @@ esptool.py --chip esp32 read_flash 0x310000 0xF0000 spiffs.bin
 mkspiffs.exe -u spiffs_unpack -b 4096 -p 256 -s 0xF0000 .\spiffs.bin
 ```
 
+## Delete spiffs
+```bash
+esptool.py erase_region 0x310000 0xF0000
+```
+
 ## QEMU
 ```bash
 (cd build; esptool.py --chip esp32 merge_bin --fill-flash-size 4MB -o flash_image.bin @flash_args)
