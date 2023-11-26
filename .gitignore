@@ -2,6 +2,7 @@
 !.gitignore
 !LICENSE
 !README.md
+!README.macos
 !README.windows
 !blueretro_dev.sh
 !ps_blueretro_dev.ps1

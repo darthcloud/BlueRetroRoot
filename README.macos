@@ -1,0 +1,59 @@
+# BlueRetro Development on macOS 13+
+
+## Table of contents
+* [1 - Initial setup](#1---initial-setup)
+  * [1.1 - Softwares to download & install](#11---softwares-to-download--install)
+    * [1.1.1 - Homebrew](#111---homebrew)
+    * [1.1.2 - Install ESP-IDF Prerequisites](#112---install-esp-idf-prerequisites)
+  * [1.2 - BlueRetro code checkout](#12---blueretro-code-checkout)
+* [2 - Compiling BlueRetro firmware](#2---compiling-blueretro-firmware)
+
+## 1 - Initial setup
+
+### 1.1 - Softwares to download & install
+
+#### 1.1.1 - Homebrew
+1. Open a Terminal (in Finder->Applications->Utilities).
+2. Install Homebrew with these commands:
+   ```
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/$USER/.zprofile
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+   ```
+
+#### 1.1.2 - Install ESP-IDF Prerequisites
+1. Open a Terminal (in Finder->Applications->Utilities).
+2. Do the following command:
+   ```
+   brew install cmake ninja dfu-util
+   ```
+
+### 1.2 - BlueRetro code checkout
+1. Open a Terminal (in Finder->Applications->Utilities).
+3. Do the following commands:
+   ```zsh
+   cd ~
+   git clone https://github.com/darthcloud/BlueRetroRoot.git
+   cd ~/BlueRetroRoot/
+   git submodule update --init --recursive
+   cd esp-idf
+   export IDF_TOOLS_PATH=$HOME/BlueRetroRoot/
+   ./install.sh
+   ```
+
+##  2 - Compiling BlueRetro firmware
+1. Open a Terminal (in Finder->Applications->Utilities).
+3. Do the following commands:
+   ```zsh
+   cd ~/BlueRetroRoot/
+   . ./blueretro_dev.sh
+   cd BlueRetro
+   # Replace configs/hw1/universal by any other config you may wish
+   cp configs/hw1/universal sdkconfig
+   idf.py build
+   # Replace serial device with your own
+   idf.py -p /dev/cu.usbserial flash
+   idf.py -p /dev/cu.usbserial monitor
+   ```
+
+<!-- vim: set syntax=Markdown: -->
