@@ -1,0 +1,75 @@
+# BlueRetroRoot
+Root repository to sync esp-idf and BlueRetro version
+
+See [BlueRetro repo](https://github.com/darthcloud/BlueRetro) for main projet infomation.
+
+# Development instructions
+
+[Instructions for Ubuntu 20.04+](#blueretro-development-on-ubuntu-2004)\
+[Instructions for macOS 13+](README.macos)\
+[Instructions for Windows 10+](README.windows)
+
+These instructions likely mostly apply for older version and/or different distribution as well.
+But they are not tested, so YMMV and you're on your own.
+
+# BlueRetro development on Ubuntu 20.04+
+
+## 1 - Initial setup
+
+### 1.1 - Install ESP-IDF Prerequisites
+1. Open a Terminal (like gnome-terminal or konsole).
+2. Do the following command:
+   ```bash
+   sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+   ```
+
+### 1.2 - BlueRetro code checkout
+1. Open a Terminal (like gnome-terminal or konsole).
+3. Do the following commands:
+   ```bash
+   cd ~
+   git clone https://github.com/darthcloud/BlueRetroRoot.git
+   cd ~/BlueRetroRoot/
+   git submodule update --init --recursive
+   cd esp-idf
+   export IDF_TOOLS_PATH=$HOME/BlueRetroRoot/
+   ./install.sh
+   ```
+
+##  2 - Compiling BlueRetro firmware
+1. Open a Terminal (like gnome-terminal or konsole).
+3. Do the following commands:
+   ```bash
+   cd ~/BlueRetroRoot/
+   . ./blueretro_dev.sh
+   cd BlueRetro
+   # Replace configs/hw1/universal by any other config you may wish
+   cp configs/hw1/universal sdkconfig
+   idf.py build
+   # Replace serial device with your own
+   idf.py -p /dev/ttyUSB0 flash
+   idf.py -p /dev/ttyUSB0 monitor
+   ```
+
+# ESP32 embedded development tips
+
+## Dump spiffs
+```bash
+esptool.py --chip esp32 read_flash 0x310000 0xF0000 spiffs.bin
+mkspiffs.exe -u spiffs_unpack -b 4096 -p 256 -s 0xF0000 .\spiffs.bin
+```
+
+## Delete spiffs
+```bash
+esptool.py erase_region 0x310000 0xF0000
+```
+
+## QEMU
+```bash
+(cd build; esptool.py --chip esp32 merge_bin --fill-flash-size 4MB -o flash_image.bin @flash_args)
+```
+```bash
+qemu-system-xtensa -nographic -machine esp32 -drive file=build/flash_image.bin,if=mtd,format=raw -serial tcp::5555,server,nowait
+```
+
+<!-- vim: set syntax=Markdown: -->
