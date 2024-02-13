@@ -1,0 +1,4 @@
+# Python package requirements for BlueRetro pytest.
+
+pytest
+numpy
