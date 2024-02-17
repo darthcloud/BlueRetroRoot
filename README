@@ -72,4 +72,13 @@ esptool.py erase_region 0x310000 0xF0000
 qemu-system-xtensa -machine esp32 -drive file=build/flash_image.bin,if=mtd,format=raw -serial tcp::5555,server,nowait -display none -daemonize
 ```
 
+## Running GitHub action offline
+
+Using [github.com/nektos/act](https://github.com/nektos/act)
+
+Checkout main repo separately, then:
+```bash
+act -W .github/workflows/quick.yml --input hw_version=hw1 --input br_config=universal --artifact-server-path /tmp
+```
+
 <!-- vim: set syntax=Markdown: -->

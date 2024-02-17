@@ -122,6 +122,10 @@ RUN bash -c ': \
   '
 ENV PATH=/opt/qemu/bin:${PATH}
 
+# Install node for nektos/act
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
+
 WORKDIR /home/runner
 USER runner
 
