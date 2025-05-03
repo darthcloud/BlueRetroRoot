@@ -50,9 +50,9 @@ RUN : \
 # Use IDF_CLONE_SHALLOW_DEPTH=X to define the depth if IDF_CLONE_SHALLOW is used (i.e. --depth=X)
 # Use IDF_INSTALL_TARGETS to install tools only for selected chip targets (CSV)
 
-ARG IDF_CLONE_URL=https://github.com/espressif/esp-idf.git
-ARG IDF_CLONE_BRANCH_OR_TAG=master
-ARG IDF_CHECKOUT_REF=030c9957dbc5c5a627cf1bb4b2b856f1b6c1343c
+ARG IDF_CLONE_URL=https://github.com/darthcloud/shanwan_esp-idf.git
+ARG IDF_CLONE_BRANCH_OR_TAG=shanwan
+ARG IDF_CHECKOUT_REF=5448d575c8bf00ae7464e6e4e62f1c060b446608
 ARG IDF_CLONE_SHALLOW=
 ARG IDF_CLONE_SHALLOW_DEPTH=1
 ARG IDF_INSTALL_TARGETS=all
